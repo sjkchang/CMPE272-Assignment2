@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: flask-blog-posts-api
+    namespace: default
+spec:
+    selector:
+        matchLabels:
+            name: flask-blog-posts-api
+    replicas: 2 # tells deployment to run 2 pods matching the template
+    template: # create pods using pod definition in this template
+        metadata:
+            # unlike pod.yaml, the name is not included in the meta data as a unique name is
+            # generated from the deployment name
+            labels:
+                name: flask-blog-posts-api
+        spec:
+            containers:
+                - name: flask-blog-client
+                  image: sjkchang/flask-blog-posts-api:latest # Image Name
+                  env:
+                      - name: FLASK_PORT # ENVIRONMENT Variable Name
+                        value: 5050 # ENVIRONMENT Variable Value
+                  ports:
+                      - containerPort: 5050 # Port Number EX. 5000

@@ -1,0 +1,9 @@
+apiVersion: "extensions/v1beta1"
+kind: "Ingress"
+metadata:
+    name: "flask-blog-client-ingress"
+    namespace: "default"
+spec:
+    backend:
+        serviceName: "flask-blog-client-service"
+        servicePort: 5000
